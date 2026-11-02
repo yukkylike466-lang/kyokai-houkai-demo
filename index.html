@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0c1520"><meta name="description" content="擬似ゲームマスター型サバイバルRPGの試作版"><title>境界崩壊 | サバイバルRPG プロトタイプ</title>
+<style>
+:root{--bg:#09121b;--surface:#101e2a;--panel:#152632;--panel2:#1b303d;--line:#2a4453;--txt:#eef3f2;--muted:#9cafaF;--green:#77d8bd;--amber:#f5c27c;--red:#fa9d97;--shadow:0 24px 70px #0005}*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;color:var(--txt);background:radial-gradient(circle at 5% 3%,#19313c 0,transparent 32%),radial-gradient(circle at 90% 10%,#162b33 0,transparent 28%),var(--bg);min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer;transition:.2s}button:disabled{opacity:.5;cursor:not-allowed}.hidden{display:none!important}.masthead{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #344b5880;background:#0b1722ee;backdrop-filter:blur(15px);padding:13px clamp(16px,4vw,42px)}.brand{display:flex;align-items:center;gap:12px}.brand-icon{color:var(--green);font-size:34px}.brand-top,.eyebrow,.panel-label,.quick-label{font-size:11px;letter-spacing:2px;font-weight:800;color:var(--green)}.brand-title{font-size:17px;font-weight:900;letter-spacing:.05em}.brand-title .muted{font-size:10px;font-weight:500;letter-spacing:.05em;color:var(--muted)}.head-actions{display:flex;align-items:center;gap:8px}.chip{display:inline-block;border:1px solid #4b837e;padding:6px 10px;border-radius:30px;color:var(--green);font-size:11px;white-space:nowrap}.chip.on{background:#2e6a5d50}.mini-btn,.subtle-btn{border:1px solid var(--line);background:#1e3640;color:var(--txt);border-radius:8px;padding:8px 11px;font-size:12px}.mini-btn:hover,.subtle-btn:hover{border-color:var(--green)}.setup-screen{max-width:1070px;margin:0 auto;padding:28px 18px 64px;display:grid;grid-template-columns:.85fr 1fr;gap:28px;align-items:start}.hero{padding:55px 10px 20px 0;position:sticky;top:120px}.hero h1{font-size:clamp(32px,4vw,57px);line-height:1.27;letter-spacing:-.045em;margin:16px 0 24px}.hero em{font-style:normal;color:var(--green)}.hero p{font-size:15px;line-height:2;color:#bbc9cc;max-width:450px}.intro-notes{display:flex;gap:7px;flex-wrap:wrap;margin-top:25px}.intro-notes span{border:1px solid var(--line);padding:7px 9px;border-radius:5px;font-size:11px;color:#c0d0d2}.setup-card,.side-card,.story-panel{background:#12212dbb;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.setup-card{padding:26px}.section-title{display:flex;align-items:center;gap:10px;margin:8px 0 18px}.section-title h2{font-size:17px;margin:0;flex:1}.num{display:inline-grid;place-items:center;border:1px solid #427b73;border-radius:6px;color:var(--green);font-size:11px;width:29px;height:29px;font-weight:800}.sub-title{margin-top:27px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.setup-card label,.modal-content label{font-size:12px;font-weight:600;display:block;color:#b4c4c8;margin-bottom:13px}input[type=text],input[type=number],input:not([type]),select,textarea{width:100%;border:1px solid #34505d;border-radius:9px;background:#091a24;color:var(--txt);padding:11px 12px;margin-top:7px;outline:none;font-size:14px}input:focus,select:focus,textarea:focus{border-color:#70ceae;box-shadow:0 0 0 2px #70ceae30}textarea{resize:vertical;min-height:52px;line-height:1.7}.stat-grid-setup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stat-grid-setup label{margin:0}.stat-grid-setup input{margin-top:4px;text-align:center}.advanced{border-top:1px solid var(--line);padding:15px 0}.advanced summary{font-size:13px;cursor:pointer;color:var(--green);font-weight:700}.advanced .form-grid{margin-top:15px}.disclaimer{font-size:11px;color:#a6b9bf;line-height:1.85;margin:15px 0}.primary{border:0;background:linear-gradient(110deg,#81ddbf,#5eb7ab);color:#0c2429;font-weight:800;border-radius:10px;padding:13px 18px}.primary:hover{filter:brightness(1.07)}.wide{width:100%;margin-top:9px;display:flex;justify-content:center;gap:12px}.secondary,.danger,.import-label{background:#243945;border:1px solid #395564;color:var(--txt);padding:11px 12px;border-radius:9px;text-align:center;font-size:13px}.secondary:hover,.import-label:hover{border-color:#68a9aa}.danger{background:#492f35;border-color:#794d58;color:#ffc7c4}.game{max-width:1380px;margin:0 auto;padding:20px 18px 50px}.game-top{padding:12px 7px 23px}.top-line{display:flex;justify-content:space-between;align-items:center;gap:14px}.clock{font-size:12px;letter-spacing:1px;color:#b1c5cc;font-variant-numeric:tabular-nums}.game-top h1{font-size:32px;margin:12px 0 7px}.subhead{color:#aebec6;font-size:13px;line-height:1.8;margin:0 0 14px}.objective{display:inline-flex;align-items:center;gap:6px;border:1px solid #547769;border-radius:7px;color:#d1efdf;padding:9px 13px;background:#20473755;font-size:13px}.game-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(285px,1fr);gap:16px;align-items:start}.story-panel{min-height:600px;padding:20px}.panel-label{display:flex;align-items:center;gap:8px;color:#a6c2c6;font-size:10px;letter-spacing:1.3px}.online-dot{width:7px;height:7px;border-radius:100%;background:#63e1b0}.feed{padding:14px 0;display:flex;flex-direction:column;gap:11px;min-height:330px;max-height:600px;overflow-y:auto;scrollbar-color:#3c5e64 transparent}.entry{border:1px solid #2d4653;border-radius:10px;background:#182b36;padding:15px;line-height:1.9;font-size:14px}.entry.story{border-left:3px solid #66cdb6}.entry.action{background:#193538;border-left:3px solid #86dbd0}.entry.warning{background:#3a302b;border-left:3px solid #ecc083}.entry.system{background:#192a36;border-left:3px solid #7c9bb7}.entry.ai{border-left:3px solid #b39de0;background:#252c40}.entry .entry-heading{font-size:10px;letter-spacing:1px;font-weight:800;color:#9cb5c0;margin-bottom:5px}.entry p{margin:0;white-space:pre-wrap}.entry .details{font-size:11px;color:var(--green);margin-top:9px;line-height:1.6;white-space:pre-wrap}.interrupt-panel{border:1px solid #ab7855;background:linear-gradient(145deg,#44342c,#2b2930);border-radius:12px;padding:15px;margin-bottom:12px}.interrupt-title{color:#ffcf9b;font-size:13px;font-weight:900}.interrupt-panel p{line-height:1.8;font-size:13px}.interrupt-buttons{display:flex;gap:7px;flex-wrap:wrap}.interrupt-buttons button{border:1px solid #b48b63;background:#5a3e32;color:#fff2dd;border-radius:8px;padding:10px;font-weight:700;font-size:12px}.command-area{border-top:1px solid var(--line);padding-top:18px}.quick-label{font-size:10px;color:#96b4bd;margin-bottom:10px}.quick-label span{letter-spacing:0;font-weight:400;color:#819aa4;margin-left:10px}.quick-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.quick-actions button{border:1px solid #45616d;border-radius:100px;padding:7px 12px;background:#1b3440;color:#cadfe0;font-size:12px}.quick-actions button:hover{border-color:var(--green)}#commandForm{display:flex;gap:9px;align-items:stretch}#commandForm textarea{margin:0;flex:1;min-width:0;background:#0b202a;min-height:88px}#commandForm button{width:124px}.help-hint{font-size:11px;color:#8fa6b0;line-height:1.8;margin:10px 0 0}.sidebar{display:flex;flex-direction:column;gap:15px}.side-card{padding:16px}.side-card .panel-label{padding-bottom:14px}.vital{margin-bottom:12px}.vital-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}.vital-top strong{font-variant-numeric:tabular-nums}.meter{height:7px;background:#283c47;border-radius:12px;overflow:hidden}.fill{height:100%;border-radius:12px;transition:width .4s}.hp{background:#ee958e}.st{background:#e7c37d}.ap{background:#85bde1}.detail-list{font-size:12px;color:#b7cbd1;line-height:2}.detail-list strong{color:#eff6f5}.inventory{display:flex;flex-wrap:wrap;gap:6px}.item{font-size:12px;border:1px solid #435a68;background:#213441;padding:7px 10px;border-radius:8px}.inventory .empty{color:#91a2ac;font-size:12px}.map{display:grid;grid-template-columns:1fr 1fr;gap:6px}.map button{border:1px solid #385360;background:#213541;border-radius:8px;padding:11px 8px;color:#a6bdc7;text-align:left;font-size:12px}.map button.visited{color:#eef6f4}.map button.here{border-color:#6ad6b6;background:#284d49;color:#d9fff1}.map button.blocked{opacity:.55}.map button .room-marker{display:block;font-size:9px;color:#79bcab;margin-bottom:3px}.stack{display:flex;flex-direction:column;gap:8px}.stack button,.stack .import-label{width:100%}.import-label{cursor:pointer}.footer{max-width:1350px;margin:auto;padding:20px 18px;color:#718c97;font-size:10px;line-height:1.7}.modal{position:fixed;inset:0;display:grid;place-items:center;z-index:30;padding:16px}.modal-backdrop{position:absolute;inset:0;background:#000b;backdrop-filter:blur(5px)}.modal-content{position:relative;background:#132531;border:1px solid #45606a;border-radius:16px;padding:25px;max-width:560px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow)}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h2{margin:0;font-size:20px}.check-line{padding:12px 0}.check-line label{display:flex;align-items:center;gap:9px}.check-line input{accent-color:#75d9bd}@media(max-width:890px){.setup-screen{grid-template-columns:1fr;max-width:650px;gap:15px}.hero{position:static;padding:26px 6px 0}.hero h1{font-size:35px}.game-layout{grid-template-columns:minmax(0,1fr)}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:10px}.story-panel{min-height:0}.feed{max-height:550px}}@media(max-width:560px){.masthead{padding:9px 13px}.brand-top{font-size:9px;letter-spacing:1px}.brand-title{font-size:14px}.brand-title .muted{display:none}.brand-icon{font-size:26px}.chip{font-size:10px;padding:5px 7px}.setup-screen{padding:16px 10px 35px}.hero{padding:12px 6px}.hero h1{font-size:30px}.setup-card{padding:17px}.stat-grid-setup{grid-template-columns:repeat(3,1fr)}.form-grid{gap:8px}.game{padding:10px 10px 30px}.game-top h1{font-size:26px}.top-line{align-items:flex-start}.eyebrow{font-size:10px}.clock{font-size:10px;white-space:nowrap}.story-panel{padding:12px;border-radius:12px}.entry{padding:11px 12px;font-size:13px}.feed{min-height:280px;max-height:485px}.sidebar{grid-template-columns:1fr 1fr}.side-card{padding:12px}.sidebar .side-card:first-child{grid-column:1/-1}.sidebar .side-card:last-child{grid-column:1/-1}.sidebar .side-card:nth-child(4){grid-column:1/-1}.quick-label span{display:block;margin:4px 0}.quick-actions button{font-size:11px;padding:7px 9px}#commandForm{flex-direction:column}#commandForm textarea{min-height:64px}#commandForm button{width:100%;padding:12px}.game-top{padding:12px 2px 16px}.objective{font-size:12px}.footer{padding:15px 10px}}@media(max-width:370px){.form-grid{grid-template-columns:1fr}.sidebar{grid-template-columns:1fr}.sidebar .side-card{grid-column:auto!important}}
+/* v0.3: 複合コマンド入力 */
+.command-builder{display:flex;flex-direction:column;gap:13px}.cmd-tabs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;padding:6px 0 12px;max-width:100%}.cmd-tab{flex:0 0 auto;scroll-snap-align:start;border:1px solid var(--line);background:#172c38;color:#c1d0d4;border-radius:12px;padding:11px 13px;font-size:13px;font-weight:700;min-height:43px}.cmd-tab.active{color:#081d20;background:var(--green);border-color:var(--green)}.cmd-body{padding:12px 14px 15px;border:1px solid #345965;border-radius:13px;background:#10232d}.cmd-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}.cmd-field{display:block;min-width:0;font-size:12px;font-weight:700;color:#b8cbd0}.cmd-field-label{display:block}.cmd-field .cmd-select{margin-top:7px;background:#0c1c27;padding:11px 9px;min-height:43px}.cmd-field-hint{grid-column:1/-1;font-size:13px;line-height:1.8;color:#b1cbd0;margin:6px 0}.cmd-preview{background:#0d1d27;border:1px solid #31535e;border-left:3px solid var(--green);border-radius:8px;padding:11px 13px;margin:6px 0 13px}.cmd-preview-caption{color:var(--green);font-size:11px;font-weight:800;letter-spacing:.04em}.cmd-preview p{margin:8px 0 0;line-height:1.8;font-size:13px}.cmd-warning{color:var(--amber);font-size:12px}.cmd-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cmd-buttons button{min-height:46px;border-radius:9px;font-weight:800;font-size:13px}.cmd-queue{border:1px dashed #34505d;border-radius:12px;padding:13px}.cmd-queue-title{font-weight:800;font-size:13px;margin-bottom:10px}.cmd-hint{font-size:12px;color:#b0c4cb;line-height:1.8}.cmd-queued{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid #34505d}.cmd-queued-text{font-size:12px;line-height:1.75;flex:1;min-width:0}.cmd-remove{color:var(--amber);background:transparent;border:1px solid #5d5b50;border-radius:7px;min-height:33px;padding:5px 8px;font-size:11px}.cmd-queue .cmd-buttons{margin-top:10px}button:focus-visible,select:focus-visible{outline:3px solid #e0eaa6;outline-offset:2px}@media(max-width:560px){.cmd-body{padding:11px}.cmd-tabs{margin-right:-2px}.cmd-field{font-size:11px}.cmd-fields{gap:8px}.cmd-buttons{grid-template-columns:1fr}.cmd-tab{padding:10px 12px}.cmd-queued{align-items:flex-start}.cmd-remove{flex:0 0 auto}}
+
+</style>
+</head>
+<body>
+<div id="app">
+<header class="masthead"><div class="brand"><span class="brand-icon">◇</span><div><div class="brand-top">BOUNDARY / PROJECT 01</div><div class="brand-title">境界崩壊 <span class="muted">— SURVIVAL PROTOTYPE</span></div></div></div><div class="head-actions"><span id="aiStatus" class="chip">GM: 擬似AI・オフライン</span><button id="settingsOpen" class="mini-btn hidden">⚙ 設定</button></div></header>
+<section id="setup" class="setup-screen">
+  <div class="hero"><div class="eyebrow">INTERACTIVE SURVIVAL / TEXT RPG</div><h1>世界が壊れる瞬間を、<br><em>あなたの選択で。</em></h1><p>複合コマンドで行動を組み立てる。NPCが割り込む。選んだ結果が、世界に残る。</p><div class="intro-notes"><span>複合コマンド</span><span>ターン制</span><span>NPC割り込み</span><span>自動セーブ</span></div></div>
+  <div class="setup-card"><div class="section-title"><span class="num">01</span><h2>世界・開始条件</h2></div>
+    <div class="form-grid"><label>世界の異変<select id="scenario"><option value="mutation">研究施設の生物変異</option><option value="portal">異界の扉と魔物</option><option value="random">ランダム</option></select></label><label>開始状況<select id="timing"><option value="during">異変発生直後</option><option value="before">異変発生前</option><option value="after">異変発生後</option><option value="random">ランダム</option></select></label></div>
+    <label>自由設定・補足（任意）<textarea id="worldNote" rows="2" maxlength="250" placeholder="例：舞台は地方都市。政府の救助隊が来る噂がある。"></textarea></label>
+    <div class="section-title sub-title"><span class="num">02</span><h2>キャラクター作成</h2><button id="reroll" class="subtle-btn">↻ ランダム再生成</button></div>
+    <div class="form-grid"><label>名前<input id="pcName" value="朝霧 湊" maxlength="24"></label><label>職業<input id="pcJob" value="会社員" maxlength="24"></label></div>
+    <div class="form-grid"><label>性別<select id="pcGender"><option value="未設定" selected>未設定</option><option value="男性">男性</option><option value="女性">女性</option><option value="custom">その他・自由入力</option></select></label><label id="pcGenderCustomWrap" class="hidden">性別（自由入力）<input id="pcGenderCustom" maxlength="40" placeholder="例：自由に設定"></label></div>
+    <div class="stat-grid-setup" id="statInputs"></div>
+    <div class="form-grid"><label>異能力の発現<select id="powerState"><option value="none">異能力なし</option><option value="dormant">未発現（潜在）</option><option value="active">発現済み</option></select></label><label>異能力名称<input id="powerName" placeholder="例：念動力" value="念動力"></label></div>
+    <div class="form-grid"><label>最大AP（異能力エネルギー）<input id="powerAP" type="number" min="0" max="1000" value="70"></label><label>異能制御値（0〜100）<input id="powerControl" type="number" min="0" max="100" value="30"></label></div>
+    <div class="form-grid"><label>初期特技（カンマ区切り・任意）<input id="initialTalents" maxlength="160" placeholder="例：危機察知, 急所狙い"></label><label>初期技能の補足（任意）<input id="extraSkill" maxlength="100" placeholder="例：料理"></label></div>
+    <div class="section-title sub-title"><span class="num">03</span><h2>ゲーム設定</h2></div>
+    <div class="form-grid"><label>成長速度<select id="growth"><option value="rpg">RPG（成長しやすい）</option><option value="survival">サバイバル（標準）</option><option value="real">リアル（厳しい）</option></select></label><label>ゲーム難易度<select id="difficulty"><option value="easy">イージー</option><option value="normal" selected>ノーマル</option><option value="hard">ハード</option><option value="extreme">エクストリーム</option></select></label><label>負傷モード<select id="injuryMode"><option value="game">ゲーム（簡易）</option><option value="survival" selected>サバイバル（部位負傷）</option><option value="real">リアル（累積負傷）</option></select></label><label>NPC割り込み<select id="interrupt"><option value="confirm">毎回確認</option><option value="auto">自動反応</option><option value="hybrid" selected>複合型</option></select></label><label>判定表示<select id="report"><option value="story">物語のみ</option><option value="simple" selected>簡易表示</option><option value="detail">詳細表示</option></select></label></div>
+
+    <details class="advanced"><summary>個別成長倍率（任意）</summary><div class="form-grid" id="growthModifiers"></div></details>
+    <div class="disclaimer">短編の施設脱出シナリオです。プレイ中の行動はコマンド選択で組み立てます。生成AI・APIキー・通信は必要ありません。</div>
+    <button class="primary wide" id="startGame">ゲームを開始する <span>→</span></button><button class="secondary wide" id="resumeGame">保存したゲームから再開</button>
+  </div>
+</section>
+<main id="game" class="game hidden">
+ <div class="game-top"><div class="top-line"><span id="sceneLabel" class="eyebrow">研究施設 / 未確認区域</span><span id="clock" class="clock">DAY 01 / 10:00</span></div><h1 id="placeTitle">ロビー</h1><p id="placeDesc" class="subhead"></p><div id="objective" class="objective">◈ 目標：施設から生きて脱出する</div></div>
+ <div class="game-layout">
+  <section class="story-panel"><div class="panel-label">LOG / ゲームマスター <span class="online-dot"></span><span id="gmLabel">ローカル判定</span></div><div id="feed" class="feed" aria-live="polite"></div>
+   <section id="interruptPanel" class="interrupt-panel hidden"><div class="interrupt-title">⚠ 割り込み発生 — 判断が必要</div><p id="interruptText"></p><div class="interrupt-buttons" id="interruptButtons"></div></section>
+   <div class="command-area" id="commandArea">
+      <div class="quick-label">ACTION COMPOSER <span>行動を選び、詳細条件を組み合わせます</span></div>
+      <div id="commandBuilder" class="command-builder" aria-label="複合コマンド作成"></div>
+   </div>
+  </section>
+  <aside class="sidebar"><div class="side-card"><div class="panel-label">STATUS / <span id="displayName">主人公</span></div><div id="vitals"></div><div class="detail-list" id="characterInfo"></div></div>
+    <div class="side-card"><div class="panel-label">MAP / 施設内</div><div id="map" class="map"></div></div>
+    <div class="side-card"><div class="panel-label">INVENTORY / 所持品</div><div id="inventory" class="inventory"></div></div>
+    <div class="side-card"><div class="panel-label">RELATION / WORLD</div><div id="worldInfo" class="detail-list"></div></div>
+    <div class="side-card"><div class="panel-label">SYSTEM / 保存</div><div class="stack"><button class="secondary" id="saveButton">現在の状態を保存</button><button class="secondary" id="exportButton">セーブデータを出力</button><label class="import-label">セーブデータを読込<input type="file" id="importFile" accept="application/json,.json" hidden></label><button class="danger" id="backToTitle">タイトルへ戻る</button></div></div>
+  </aside>
+ </div>
+</main>
+<div id="settingsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal-backdrop" id="settingsBackdrop"></div><div class="modal-content"><div class="modal-head"><h2 id="settingsTitle">プレイ中の設定</h2><button class="mini-btn" id="settingsClose">閉じる ✕</button></div><div class="form-grid"><label>NPC割り込み<select id="runtimeInterrupt"><option value="confirm">毎回確認</option><option value="auto">自動反応</option><option value="hybrid">複合型</option></select></label><label>判定表示<select id="runtimeReport"><option value="story">物語のみ</option><option value="simple">簡易表示</option><option value="detail">詳細表示</option></select></label><label>成長速度<select id="runtimeGrowth"><option value="rpg">RPG</option><option value="survival">サバイバル</option><option value="real">リアル</option></select></label><label>ゲーム難易度<select id="runtimeDifficulty"><option value="easy">イージー</option><option value="normal">ノーマル</option><option value="hard">ハード</option><option value="extreme">エクストリーム</option></select></label><label>負傷モード<select id="runtimeInjury"><option value="game">ゲーム</option><option value="survival">サバイバル</option><option value="real">リアル</option></select></label></div><div class="section-title sub-title"><span class="num">PC</span><h2>キャラクター情報</h2></div><div class="form-grid"><label>性別<select id="runtimeGender"><option value="未設定">未設定</option><option value="男性">男性</option><option value="女性">女性</option><option value="custom">その他・自由入力</option></select></label><label id="runtimeGenderCustomWrap" class="hidden">性別（自由入力）<input id="runtimeGenderCustom" maxlength="40" placeholder="例：自由に設定"></label></div><p class="disclaimer">設定変更は以後の判定に適用。すでに確定した出来事は変更しません。</p><button class="primary wide" id="saveSettings">設定を反映</button></div></div>
+<footer class="footer">BOUNDARY / PROTOTYPE 0.3 · 試作版。実在する危機への対処方法を案内するものではありません。</footer>
+</div>
+<script>
+/* 境界崩壊 Prototype 0.3 | No external client libraries. The local rules engine is authoritative. */
+'use strict';
+const SAVE_KEY='boundary_survival_proto_v1';
+const $=id=>document.getElementById(id);
+const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+const choice=arr=>arr[Math.floor(Math.random()*arr.length)];
+const rand=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
+// 性別は設定用プロフィール項目。能力値や判定の補正には使用しない。
+function genderValue(selectId,customId){return $(selectId).value==='custom'?($(customId).value.trim().slice(0,40)||'その他'):$(selectId).value}
+function genderUI(selectId,customId,wrapId,value){const known=['未設定','男性','女性'];$(selectId).value=known.includes(value)?value:'custom';$(customId).value=known.includes(value)?'':String(value||'').slice(0,40);genderToggle(selectId,wrapId)}
+function genderToggle(selectId,wrapId){$(wrapId).classList.toggle('hidden',$(selectId).value!=='custom')}
+const escapeText=s=>String(s??'');
+const stats=[['strength','筋力'],['toughness','耐久力'],['agility','瞬発力'],['intelligence','知力'],['mind','精神力'],['luck','運']];
+const modifierCats=[['ability','基礎能力値'],['skill','技能'],['talent','特技'],['power','異能力']];
+const ROOMS=['ロビー','廊下','医務室','倉庫','非常口'];
+const PATHS={'ロビー':['廊下','医務室'],'廊下':['ロビー','医務室','倉庫','非常口'],'医務室':['ロビー','廊下'],'倉庫':['廊下'],'非常口':['廊下']};
+const roomDescs={'ロビー':'倒れた案内板と割れたガラス。遠くでサイレンが鳴っている。','廊下':'照明が明滅する長い通路。足元には飛び散った書類が散乱している。','医務室':'応急処置に使えそうな物資がある。負傷した職員が息を潜めている。','倉庫':'埃っぽい棚と資材箱。非常口を開く手段が見つかるかもしれない。','非常口':'鋼鉄製の非常扉。外の空気が隙間から流れ込んでくる。'};
+let state=null, aiAvailable=false, busy=false, passcode='';
+const hasSave=()=>{try{return !!localStorage.getItem(SAVE_KEY)}catch(e){return false}};
+function localSave(){if(!state)return;try{localStorage.setItem(SAVE_KEY,JSON.stringify(state))}catch(e){console.warn('保存失敗',e)}}
+function status(t,details='',kind='system'){if(!state)return;state.log.push({kind,text:t,details,at:stamp()});if(state.log.length>100)state.log=state.log.slice(-100)}
+function stamp(){return `DAY ${String(Math.floor(state.world.minute/1440)+1).padStart(2,'0')} ${String(Math.floor((state.world.minute%1440)/60)).padStart(2,'0')}:${String(state.world.minute%60).padStart(2,'0')}`}
+function tick(delta=1){state.world.minute+=delta;state.world.turns++;if(state.world.turns%4===0){state.world.alarm=clamp(state.world.alarm+1,0,9);if(state.world.npc.alive&&state.world.npc.room==='医務室'&&state.world.turns>=8)state.world.npc.worry++}if(state.world.turns===5)status('施設の非常放送がノイズ混じりに流れ始めた。建物の被害が徐々に拡大しているようだ。','','system');if(state.world.turns===9&&state.world.npc.alive&&!state.world.npc.follow&&state.world.npc.room==='医務室'){state.world.npc.room='ロビー';status('医務室にいた看護師の真鍋が、比較的安全な場所を求めてロビーへ移動した。','','system')}if(state.pc.downed){state.pc.rescueClock=(state.pc.rescueClock||0)+1;if(state.pc.rescueClock>=2&&!state.world.end){state.world.end='死亡（救命されなかった）';status('救命が間に合わず、意識が戻らなくなった。','','story')}}}
+function initializeFields(){const container=$('statInputs');stats.forEach(([k,l])=>{let label=document.createElement('label');label.textContent=l;let inp=document.createElement('input');inp.type='number';inp.min='0';inp.max='100';inp.value={'strength':48,'toughness':52,'agility':56,'intelligence':60,'mind':53,'luck':55}[k];inp.id='stat_'+k;label.append(inp);container.append(label)});modifierCats.forEach(([k,l])=>{let label=document.createElement('label');label.textContent=l+'倍率';let sel=document.createElement('select');sel.id='modifier_'+k;[0.5,1,1.5,2,3,4,5].forEach(v=>{let opt=document.createElement('option');opt.value=v;opt.textContent='×'+v.toFixed(1);if(v===1)opt.selected=true;sel.append(opt)});label.append(sel);$('growthModifiers').append(label)});$('resumeGame').disabled=!hasSave()}
+function rerollPC(){const characters=[['朝霧 湊','男性'],['三崎 結衣','女性'],['早瀬 零','未設定'],['神谷 拓真','男性'],['月城 澪','女性'],['小鳥遊 梓','女性']];const jobs=['会社員','看護師','警備員','大学生','整備士','元消防士'];const character=choice(characters);$('pcName').value=character[0];genderUI('pcGender','pcGenderCustom','pcGenderCustomWrap',character[1]);$('pcJob').value=choice(jobs);stats.forEach(([k])=>{$('stat_'+k).value=rand(30,75)})}
+function getSetup(){const raw={};stats.forEach(([k])=>raw[k]=clamp(Number($('stat_'+k).value)||0,0,100));const mods={};modifierCats.forEach(([k])=>mods[k]=Number($('modifier_'+k).value));const scenario=$('scenario').value==='random'?choice(['mutation','portal']):$('scenario').value;const timing=$('timing').value==='random'?choice(['before','during','after']):$('timing').value;return {world:{scenario,timing,note:$('worldNote').value.trim().slice(0,250)},pc:{name:$('pcName').value.trim()||'生存者',gender:genderValue('pcGender','pcGenderCustom'),job:$('pcJob').value.trim()||'一般市民',stats:raw,powerState:$('powerState').value,powerName:$('powerName').value.trim()||'未知の力',powerAP:clamp(Number($('powerAP').value)||0,0,1000),powerControl:clamp(Number($('powerControl').value)||0,0,100),initialTalents:$('initialTalents').value.split(/[,、，]/).map(x=>x.trim()).filter(Boolean).slice(0,8),extraSkill:$('extraSkill').value.trim().slice(0,30)},settings:{growth:$('growth').value,difficulty:$('difficulty').value,injuryMode:$('injuryMode').value,interrupt:$('interrupt').value,report:$('report').value,ai:false,mods,defense:'evade'}}}
+function newState(cfg){const hp=clamp(60+Math.floor(cfg.pc.stats.toughness*.6),60,120),st=clamp(55+Math.floor(cfg.pc.stats.toughness*.55),55,110);const enemyName=cfg.world.scenario==='portal'?'異界の獣':'変異生物';let w={minute:10*60,turns:0,room:'ロビー',visited:['ロビー'],alarm:1,found:[],roomItems:{'ロビー':['床の石'],'廊下':['鉄パイプ'],'医務室':['応急セット','飲料水'],'倉庫':['非常用カード','バッテリー'],'非常口':[]},enemy:{name:enemyName,hp:37,max:37,room:'廊下',alive:true,alert:1,stunned:0},npc:{name:'真鍋 莉央',job:'看護師',room:'医務室',trust:0,worry:0,alive:true,helped:false,personality:choice(['献身的','慎重','利己的']),follow:false,memories:[]},doorOpen:false,blocked:false,escaped:false,end:null};return {version:1,config:cfg.world,settings:cfg.settings,pc:{...cfg.pc,hp,maxHp:hp,downed:false,rescueClock:0,st,maxSt:st,ap:cfg.pc.powerState==='none'?0:cfg.pc.powerAP,maxAp:cfg.pc.powerState==='none'?0:cfg.pc.powerAP,skill:{'格闘':38,'探索':35,'交渉':40,'医療':24,'機械':30,'回避':43,'投擲':40,...(cfg.pc.extraSkill?{[cfg.pc.extraSkill]:30}:{})},xp:{},talents:cfg.pc.initialTalents||[],injuries:[],experience:0},world:w,inventory:['懐中電灯','飲料水'],log:[],pending:null}}
+function intro(){let s=state;const incident=s.config.scenario==='portal'?'巨大な扉が施設地下に現れ、見知らぬ獣があふれ出した。':'施設の実験区画で警報が鳴り、職員が異形へ変貌し始めた。';const lead={before:'いつも通りの一日。しかし、次の瞬間、建物全体が激しく揺れた。',during:'非常ベルが鳴り響き、人々が叫びながら走り抜ける。',after:'外部との連絡が途絶えて数日。建物の中には異様な静けさがある。'}[s.config.timing];status(`${lead}\n${incident}\nあなたは施設のロビーにいる。出口の位置はまだ分からない。まずは周囲を調べるか、別の場所へ移動できそうだ。`,'','story');if(s.config.note)status('世界設定の補足：「'+s.config.note+'」\n※試作版では物語の補足情報として保持します。ルール全体への反映はAI接続時の対象です。','','system')}
+function start(){passcode="";state=newState(getSetup());intro();localSave();showGame()}
+function showGame(){$('setup').classList.add('hidden');$('game').classList.remove('hidden');$('settingsOpen').classList.remove('hidden');render()}
+function title(){state&&localSave();$('game').classList.add('hidden');$('setup').classList.remove('hidden');$('settingsOpen').classList.add('hidden');$('resumeGame').disabled=!hasSave();window.scrollTo(0,0)}
+function resume(){passcode="";try{const s=JSON.parse(localStorage.getItem(SAVE_KEY));if(!s||s.version!==1||!s.pc||!s.world||!Array.isArray(s.log))throw new Error('無効な保存データです');state=s;state.pc.gender=state.pc.gender||'未設定';state.settings.ai=false;showGame()}catch(e){alert('保存データを読み込めません：'+e.message)}}
+function addElement(parent,tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;parent.append(e);return e}
+function render(){if(!state)return;const s=state,w=s.world,p=s.pc; $('displayName').textContent=p.name;$('placeTitle').textContent=w.room;$('placeDesc').textContent=roomDescs[w.room];$('sceneLabel').textContent=s.config.scenario==='portal'?'異界の扉 / 旧研究施設':'変異事故 / 旧研究施設';$('clock').textContent=stamp();$('objective').textContent=w.end?('◈ 結末：'+w.end):'◈ 目標：非常用カードを探し、施設から脱出する';$('gmLabel').textContent='複合コマンド / 疑似AI';
+ const vit=$('vitals');vit.replaceChildren();[['HP',p.hp,p.maxHp,'hp'],['ST',p.st,p.maxSt,'st'],['AP',p.ap,p.maxAp,'ap']].forEach(([l,v,max,cls])=>{const wrap=addElement(vit,'div','vital');const top=addElement(wrap,'div','vital-top');addElement(top,'span','',l);addElement(top,'strong','',`${v} / ${max}`);const meter=addElement(wrap,'div','meter');const fill=addElement(meter,'div','fill '+cls);fill.style.width=(max>0?v/max*100:0)+'%'});$('characterInfo').replaceChildren();[['性別',p.gender||'未設定'],['職業',p.job],['筋力',p.stats.strength],['瞬発力',p.stats.agility],['異能力',p.powerState==='active'?p.powerName:p.powerState==='dormant'?'未発現':'なし'],['異能制御',p.powerControl],['特技',p.talents.join('、')||'未取得'],['負傷',p.injuries.map(i=>i.part+':'+i.type).join('、')||'なし'],['状態',p.downed?'瀕死（要救助）':'行動可能'],['行動回数',w.turns]].forEach(([k,v])=>addElement($('characterInfo'),'div','',k+'：'+v));
+ const map=$('map');map.replaceChildren();ROOMS.forEach(r=>{const b=addElement(map,'button',(r===w.room?'here ':'')+(w.visited.includes(r)?'visited ':'')+(PATHS[w.room].includes(r)?'':'blocked '));addElement(b,'span','room-marker',r===w.room?'● 現在地':w.visited.includes(r)?'◈ 訪問済':'・未訪問');addElement(b,'strong','',r);b.disabled=!!w.end||!!s.pending||r===w.room||!PATHS[w.room].includes(r);b.addEventListener('click',()=>dispatch('移動：'+r))});
+ const inv=$('inventory');inv.replaceChildren();if(!s.inventory.length)addElement(inv,'span','empty','所持品なし');else s.inventory.forEach(x=>addElement(inv,'span','item',x));
+ $('worldInfo').replaceChildren();[['危険度',`${w.alarm}/9`],['異形の脅威',w.enemy.alive?'生存 / 現在地不明':'排除済'],['看護師との関係',w.npc.trust>1?'信頼':w.npc.trust<0?'警戒':'不明'],['看護師の性格',w.npc.personality||'献身的'],['看護師の行動',w.npc.follow?'同行中':w.npc.room+'で活動中'],['世界の出来事',w.found.length+' 件の情報を発見']].forEach(([k,v])=>addElement($('worldInfo'),'div','',k+'：'+v));
+ const feed=$('feed');feed.replaceChildren();s.log.forEach(e=>{const box=addElement(feed,'article','entry '+e.kind);addElement(box,'div','entry-heading',e.kind==='action'?'YOU / 行動':e.kind==='warning'?'ALERT / 割り込み':e.kind==='ai'?'AI GM / 追加描写':e.kind==='story'?'GM / 物語':'SYSTEM / 判定');addElement(box,'p','',e.text);if(e.details&&s.settings.report!=='story'){const viewDetail=s.settings.report==='detail'?e.details:e.details.split('\n')[0].split(' / ').filter(x=>/^(HP|ST|AP|敵HP|救助|非常口|脅威|状態|経験値|クリティカル)/.test(x)).join(' / ');if(viewDetail)addElement(box,'div','details',viewDetail)}});feed.scrollTop=feed.scrollHeight;
+ const pending=!!s.pending;$('interruptPanel').classList.toggle('hidden',!pending);$('commandArea').classList.toggle('hidden',pending);if(pending){$('interruptText').textContent=s.pending.text;const b=$('interruptButtons');b.replaceChildren();[['evade','回避を試みる'],['guard','防御する'],['continue','行動を続ける']].forEach(([key,label])=>{const bt=addElement(b,'button','',label);bt.addEventListener('click',()=>resolveInterrupt(key))})}
+ if(typeof renderCommandUI==='function')renderCommandUI();localSave()}
+function availableItems(){return state.world.roomItems[state.world.room]||[]}
+function perceiveTarget(x){let text=String(x||'');if(/医務室|病院|看護/.test(text))return '医務室';if(/倉庫|物置|資材/.test(text))return '倉庫';if(/非常口|脱出|出口|外/.test(text))return '非常口';if(/廊下|通路/.test(text))return '廊下';if(/ロビー|玄関|受付/.test(text))return 'ロビー';return ''}
+function parseLocal(text){let v=String(text).trim();if(!v)return[];const segments=v.split(/(?:その後|それから|続いて|次に|。|；|;|→|してから)/).filter(x=>x.trim());let all=[];for(let segment of segments){const c=segment.trim();let type='other',target='';if(/石/.test(c)&&/拾|取る/.test(c)&&/投げ/.test(c)){all.push({type:'collect',target:'床の石',raw:c});all.push({type:'attack',target:'目',raw:'拾った石を目に投げる'});if(/逃げ|走り抜け/.test(c))all.push({type:'move',target:'非常口',condition:'enemy_stunned',raw:'怯んだら逃げる'});continue}
+ if(/^(?:移動|行く|向かう|進む|走る|逃げる|脱出)|へ移動|へ行|に行く|向かっ|逃げ込/.test(c)){type='move';target=perceiveTarget(c)||'非常口'}
+ else if(/調べ|探|観察|確認|見回|探索|周囲|状況|何が/.test(c)){type='search';target=c}
+ else if(/拾|取る|回収|入手|手に取/.test(c)){type='collect';target=/カード/.test(c)?'非常用カード':/パイプ/.test(c)?'鉄パイプ':/石/.test(c)?'床の石':/応急/.test(c)?'応急セット':/水/.test(c)?'飲料水':c.replace(/^拾う[:：]?/,'').trim()}
+ else if(/攻撃|殴|叩|刺|投げ|蹴|撃|戦う|倒す/.test(c)){type='attack';target=/目|眼/.test(c)?'目':/腕|手/.test(c)?'腕':/脚|足/.test(c)?'脚':'胴体'}
+ else if(/話|尋ね|聞く|説得|交渉|呼びかけ/.test(c)){type='talk';target=c}
+ else if(/治療|手当|止血|応急処置|回復|包帯/.test(c)){type='heal';target=c}
+ else if(/休|眠|待機/.test(c)){type='rest';target=c}
+ else if(/訓練|鍛え|練習|筋トレ|トレーニング/.test(c)){type='train';target=c}
+ else if(/開|解除|解錠|カードを使|扉を破/.test(c)){type='open';target=c}
+ else if(/隠|潜む|身を伏/.test(c)){type='hide';target=c}
+ else if(/バリケード|塞ぐ|封鎖/.test(c)){type='barricade';target=c}
+ else if(/異能|念動|魔法|超能力|サイキック/.test(c)){type='power';target=c}
+ else if(/助け|救助|呼ぶ/.test(c)){type='callhelp';target=c}
+ else if(/使う|使用|飲む/.test(c)){type='use';target=c}
+ all.push({type,target,raw:c})}return all.slice(0,6)}
+async function interpret(text){return parseLocal(text)}
+function publicContext(){const s=state;return {location:s.world.room,nearby:PATHS[s.world.room],items:s.world.roomItems[s.world.room],inventory:s.inventory,npc:s.world.npc.room===s.world.room&&s.world.npc.alive?s.world.npc.name:null,enemy:s.world.enemy.room===s.world.room&&s.world.enemy.alive?s.world.enemy.name:null,hp:s.pc.hp,st:s.pc.st,ap:s.pc.ap,gender:s.pc.gender||'未設定',stats:s.pc.stats,powerState:s.pc.powerState,scenario:s.config.scenario,worldNote:s.config.note}}
+function check(ability,skill,mod=0){const a=state.pc.stats[ability]??50;const sk=skill==='異能制御'?(state.pc.powerControl??0):(state.pc.skill[skill]??25);const chance=clamp(Math.round(a*.4+sk*.6+mod),3,97);const roll=rand(1,100);return {ok:roll<=chance,roll,chance,critical:roll<=5&&roll<=chance,detail:`${ability} ${a} / ${skill} ${sk} / 補正${mod>=0?'+':''}${mod} / 成功率${chance}% / 出目${roll}`}}
+function addXP(category,skillName,base=7){const s=state;const growth={rpg:2,survival:1,real:.5}[s.settings.growth]||1;const lv=category==='power'?(s.pc.powerControl??0):category==='skill'?(s.pc.skill[skillName]??20):(s.pc.stats[skillName]??50);const penalty=lv>=86?.35:lv>=76?.6:lv>=51?.8:1;const key=`${category}.${skillName}`,times=s.pc.xp[key+'_times']||0;const repeats=s.settings.growth==='rpg'?1:s.settings.growth==='survival'?Math.max(.25,1-times*.15):Math.max(.10,1-times*.2);const modifier=s.settings.mods[category]||1;const inc=Math.max(0,Math.round(base*growth*penalty*repeats*modifier));s.pc.xp[key]=(s.pc.xp[key]||0)+inc;s.pc.xp[key+'_times']=times+1;const threshold=category==='skill'?30+Math.floor(lv*.5):70+lv;let advanced=false;if(s.pc.xp[key]>=threshold&&lv<100){s.pc.xp[key]-=threshold;if(category==='skill')s.pc.skill[skillName]=lv+1;else if(category==='power')s.pc.powerControl=lv+1;else s.pc.stats[skillName]=lv+1;advanced=true}if(category==='skill'&&skillName==='探索'&&s.pc.skill[skillName]>=50&&!s.pc.talents.includes('環境観察')){s.pc.talents.push('環境観察');status('特技「環境観察」を習得！周囲の手掛かりを捉える感覚が磨かれた。','特技：環境観察','system')}return advanced?`経験値 +${inc} / ${skillName} +1`:`経験値 +${inc}（${skillName}）`}
+function injuryFromEnemy(damage){const mode=state.settings.injuryMode;if(mode==='game'||damage<=0)return '';const part=choice(['左腕','右腕','胴体','左脚','右脚']);const type=damage>=13?'深い裂傷':'打撲';state.pc.injuries.push({part,type,severity:damage>=13?2:1});if(state.pc.injuries.length>8)state.pc.injuries.shift();if(mode==='real'&&state.pc.injuries.length>=2){state.pc.st=clamp(state.pc.st-5,0,state.pc.maxSt);return ` / ${part}：${type}（累積負傷によりST -5）`}return ` / ${part}：${type}`}
+function enemyStrikes(reason='飛びかかる'){const s=state,p=s.pc;const diff={easy:.65,normal:1,hard:1.3,extreme:1.6}[s.settings.difficulty]||1;const dmg=Math.round(rand(8,15)*diff);p.hp=clamp(p.hp-dmg,0,p.maxHp);p.st=clamp(p.st-3,0,p.maxSt);const inj=injuryFromEnemy(dmg);status(`${s.world.enemy.name}が${reason}。攻撃を受けた！`,`HP -${dmg} / ST -3${inj}\n危険度補正：${diff}`,'warning');if(p.hp<=0&&!p.downed){p.downed=true;p.rescueClock=0;status('体力が尽き、あなたは瀕死状態に陥った。救助を受けなければ死亡する。','HP 0 / 瀕死','warning')}}
+function react(choiceId){const s=state,p=s.pc;let result='';if(choiceId==='continue'){enemyStrikes('勢いよく襲いかかる');result='行動継続を優先したため、回避を行わなかった。'}else if(choiceId==='guard'){const test=check('toughness','格闘',15);p.st=clamp(p.st-4,0,p.maxSt);if(test.ok){let d=rand(1,4);p.hp=clamp(p.hp-d,0,p.maxHp);result=`身を固めて衝撃を軽減した。HP -${d} / ST -4`;status(result,test.detail,'system')}else{enemyStrikes('防御の隙を突いてくる');result='防御が間に合わなかった。'}}else{const test=check('agility','回避',10);p.st=clamp(p.st-6,0,p.maxSt);if(test.ok){result='攻撃の軌道を読み、寸前で身をかわした。ST -6';status(result,test.detail,'system');addXP('skill','回避',10)}else{enemyStrikes('回避の方向へと跳びかかる');result='回避に失敗した。'}}return result}
+async function resolveInterrupt(mode){if(!state||!state.pending)return;const pending=state.pending;state.pending=null;react(mode);render();if(!state.world.end)await runQueue(pending.queue);else render()}
+function pendingAttack(queue){const text=`${state.world.enemy.name}が身体を低くし、一気に距離を詰めてくる！ 現在の行動を続ける前にどう反応する？`;status(text,'敵が行動可能距離に到達 / 応答機会あり','warning');const setting=state.settings.interrupt;if(setting==='auto'||(setting==='hybrid'&&state.pc.hp>state.pc.maxHp*.35&&state.world.enemy.alert<3)){react(state.settings.defense||'evade');return false}state.pending={text,queue};return true}
+function moveTarget(raw){return ROOMS.includes(raw)?raw:perceiveTarget(raw)}
+function useST(amount){const p=state.pc;if(p.st<amount){status('持久力が不足しているため、行動を継続できない。','ST不足','system');return false}p.st-=amount;return true}
+function execute(action){const s=state,w=s.world,p=s.pc;const target=action.target||'';let desc='',detail='',kind='story';const context=(text)=>{desc=text;kind='story'};const skill=(name,exp)=>{detail=detail?detail+'\n'+exp:exp};switch(action.type){
+ case 'move':{const r=moveTarget(target||action.raw);if(!r){context('移動先を判断できなかった。部屋名を指定すると確実に移動できる。');break}if(r===w.room){if(r==='非常口'&&w.doorOpen){w.end='脱出成功';context('開かれた非常扉から外へ飛び出した。新鮮な空気を胸いっぱいに吸い込み、あなたは生き延びた！')}else context('すでに'+r+'にいる。');break}if(!PATHS[w.room].includes(r)){context(r+'へ直接向かう通路は見当たらない。別の経路を探す必要がある。');break}if(!useST(3))break;const wasRoom=w.room;w.room=r;if(w.npc.follow&&w.npc.alive&&w.npc.room===wasRoom){w.npc.room=r;status('看護師の真鍋も周囲を警戒しながら後に続いた。','','system')}if(!w.visited.includes(r))w.visited.push(r);tick(2);context(`${r}へ移動した。${roomDescs[r]}`);detail='ST -3 / 移動時間 2分';if(r==='非常口'&&w.doorOpen){w.end='脱出成功';context('開かれた非常口をくぐり、あなたはようやく外へ出た。夜風が頬に触れる。生存を果たした！')}break}
+ case 'search':{if(!useST(2))break;tick(3);const test=check('intelligence','探索',p.talents.includes('環境観察')?15:10);const loot=availableItems();let lines=[`周辺を調べた。${roomDescs[w.room]}`];if(loot.length){lines.push(test.ok?`見つかったもの：${loot.join('、')}。拾うことができる。`:'何か使えそうな物がある気配はするが、詳しくは分からない。')}else lines.push('すぐ手に取れそうな道具は見当たらない。');if(w.room==='非常口')lines.push(w.doorOpen?'非常扉は開いている。':'非常扉は施錠されている。非常用カードか別の解除手段が必要だ。');if(w.room==='医務室'&&w.npc.alive)lines.push('看護師の真鍋 莉央がこちらを警戒している。');if(w.room===w.enemy.room&&w.enemy.alive)lines.push('異形の足音が近い。');context(lines.join('\n'));detail=`ST -2 / ${test.detail}\n${addXP('skill','探索',6)}`;break}
+ case 'collect':{let item=target;if(!availableItems().includes(item)){if(!item||item==='拾う'||item==='拾う：')item=availableItems()[0];if(item&&!availableItems().includes(item))item=availableItems().find(x=>item.includes(x)||x.includes(item))}if(!item){context('拾える道具が見当たらない。周囲を調べれば何か見つかるかもしれない。');break}if(!useST(1))break;w.roomItems[w.room]=availableItems().filter(x=>x!==item);s.inventory.push(item);tick(1);context(item+'を拾い、持ち物に加えた。');detail='ST -1';break}
+ case 'attack':{
+   if(!w.enemy.alive||w.enemy.room!==w.room){context('この場所に攻撃できる敵はいない。');break}
+   const opts=action.options||{};const policy=opts.policy||'normal',hand=opts.hand||'right',style=opts.style||'single',part=opts.part||target||'胴体',weapon=opts.weapon||(/石|投げ/.test(action.raw||'')?'stone':/鉄パイプ/.test(action.raw||'')?'pipe':'fist');
+   const weaponName={fist:'素手',pipe:'鉄パイプ',stone:'床の石'}[weapon]||'素手';
+   if(weapon==='stone'&&!s.inventory.includes('床の石')){context('床の石が手元にない。先に拾う必要がある。');break}
+   if(weapon==='pipe'&&!s.inventory.includes('鉄パイプ')){context('鉄パイプを所持していない。まず拾ってから攻撃する必要がある。');break}
+   if(weapon==='stone'&&hand==='both'){context('石ひとつを両手で連撃することはできない。手の使い方を変更してほしい。');break}
+   if(opts.combo==='ally'&&!(w.npc.alive&&w.npc.room===w.room&&w.npc.trust>=1)){context('連携を依頼できる味方が近くにいないか、まだ信頼関係が築かれていない。');break}
+   const cost=(style==='multi'?17:10)+(hand==='both'?3:0)+(policy==='power'?3:0);
+   if(!useST(cost))break;
+   tick(style==='multi'?2:1);
+   if(weapon==='stone')s.inventory.splice(s.inventory.indexOf('床の石'),1);
+   const partMod={'胴体':0,'頭':-15,'目':-30,'腕':-12,'脚':-12}[part]??0;
+   const policyMod=policy==='accuracy'?15:policy==='power'?-15:0;
+   const handsMod=hand==='both'&&weapon==='pipe'?3:0;
+   const styleMod=style==='multi'?-10:0;
+   const teamMod=opts.combo==='ally'?12:0;
+   const skillName=weapon==='stone'?'投擲':'格闘';
+   const attempts=style==='multi'?2:1;
+   let hits=0, total=0, summaries=[];
+   for(let n=0;n<attempts;n++){
+      if(!w.enemy.alive)break;
+      const test=check(weapon==='stone'?'agility':'strength',skillName,partMod+policyMod+handsMod+styleMod+teamMod);
+      if(test.ok){
+        hits++;
+        const base={fist:5,pipe:10,stone:8}[weapon];
+        const damage=clamp(Math.round((base+Math.floor(p.stats.strength/20)+(hand==='both'?3:0)+(test.critical?7:0)+(opts.combo==='ally'?2:0)-3)*(policy==='power'?1.45:policy==='accuracy'?.8:1)),1,36);
+        w.enemy.hp=clamp(w.enemy.hp-damage,0,w.enemy.max);total+=damage;
+        if(part==='目'&&damage>=5)w.enemy.stunned=1;
+        if(part==='脚'&&damage>=9)w.enemy.stunned=1;
+        if(w.enemy.hp<=0){w.enemy.alive=false;if(!w.found.includes('敵の排除'))w.found.push('敵の排除')}
+      }
+      summaries.push(`${n+1}撃目 ${test.ok?'命中':'失敗'}（${test.chance}% / 出目${test.roll}）`);
+   }
+   const partText=part==='胴体'?'胴体':part;
+   const approach={normal:'通常',accuracy:'命中重視',power:'威力重視'}[policy];
+   if(!hits){w.enemy.alert=clamp(w.enemy.alert+1,0,9);context(`${approach}で${weaponName}を振るい、${w.enemy.name}の${partText}を狙ったが、命中しなかった。`)}
+   else{
+     const effect=part==='目'&&w.enemy.stunned?' 視界を乱し、動きを鈍らせた。':part==='脚'&&w.enemy.stunned?' 足を崩し、一時的に足止めした。':'';
+     context(`${hand==='right'?'右手':hand==='left'?'左手':'両手'}の${weaponName}で${w.enemy.name}の${partText}を狙った。${hits}回命中し、合計${total}ダメージを与えた。${effect}${w.enemy.alive?'':' 脅威は倒れ、動かなくなった。'}`);
+     if(w.enemy.alive)w.enemy.alert=clamp(w.enemy.alert+1,0,9);
+   }
+   detail=`ST -${cost} / 敵HP -${total} / ${summaries.join(' / ')}
+${addXP('skill',skillName,hits?10:4)}`;
+   if(opts.combo==='ally')detail+=' / 味方連携 +12%';
+   break;
+ }
+ case 'talk':{
+ if(w.npc.room!==w.room||!w.npc.alive){context('近くに話しかけられる相手がいない。');break}
+ tick(2);const trait=w.npc.personality||'献身的';const danger=w.enemy.alive&&w.enemy.room===w.room;
+ const attitude={献身的:14,慎重:-4,利己的:-10}[trait]||0;
+ const test=check('mind','交渉',w.npc.trust*5+attitude+(danger?-12:8));
+ if(test.ok){w.npc.trust=clamp(w.npc.trust+1,-3,5);w.npc.memories=w.npc.memories||[];if(!w.npc.memories.includes('主人公と会話し、少し信頼した'))w.npc.memories.push('主人公と会話し、少し信頼した')}
+ const utter= test.ok?(trait==='献身的'?'「負傷者を助けたいの。非常用カードは倉庫にあるはずよ」':trait==='慎重'?'「物音を立てないで。倉庫に非常用カードがあると聞いたわ」':'「生き延びるには取引が必要よ。倉庫のカードは役立つはず」'):(trait==='利己的'?'「今は自分のことだけで精一杯。私に何の得があるの？」':trait==='慎重'?'「あなたを信じていいのか、まだ分からない……」':'「すみません。落ち着く時間をください」');
+ context('真鍋 莉央（'+trait+'）は'+(danger?'背後を何度も振り返りながら、':'あなたを見て、')+utter+(test.ok?' 一緒に動くよう依頼できるかもしれない。':''));
+ detail=`${test.detail}\n${addXP('skill','交渉',7)}`;
+ if(test.ok&&!w.found.includes('カードの場所'))w.found.push('カードの場所');break}
+ case 'recruit':{
+ if(!w.npc.alive||w.npc.room!==w.room){context('協力を頼める仲間が近くにいない。');break}
+ tick(2);if(w.npc.follow){context('真鍋はすでにあなたと同行している。');break}
+ if(w.npc.trust<1){context('真鍋はまだ十分に信頼していない。「まず、状況を教えて……」と首を横に振る。');break}
+ const trait=w.npc.personality||'献身的';const danger=w.enemy.alive&&w.enemy.room===w.room;
+ if(trait==='利己的'&&w.npc.trust<2){context('真鍋は「自分の身を危険にさらす理由がない」と同行を断った。');break}
+ if(trait==='慎重'&&danger){context('真鍋は危険を察して踏みとどまった。「今はここを離れる方が危険だと思う……」');break}
+ w.npc.follow=true;w.npc.memories=w.npc.memories||[];w.npc.memories.push('主人公と同行する約束をした');context('真鍋は頷いて救急用の手荷物を抱える。「分かった。あなたと一緒に行く。無茶だけはしないでね」');detail='NPC：真鍋が同行 / 連携行動を使用可能';break}
+ case 'heal':{if(!s.inventory.includes('応急セット')&&!(w.npc.room===w.room&&w.npc.alive&&w.npc.trust>=1)){context('治療に使える物資や協力者が不足している。医務室を探すとよいかもしれない。');break}tick(7);const test=check('intelligence','医療',w.npc.room===w.room&&w.npc.trust>=1?25:10);if(s.inventory.includes('応急セット'))s.inventory.splice(s.inventory.indexOf('応急セット'),1);if(test.ok){const heal=rand(16,25);p.hp=clamp(p.hp+heal,0,p.maxHp);if(p.injuries.length)p.injuries.shift();context(`応急処置を行った。苦痛が和らぎ、体力が${heal}回復した。`);detail=`HP +${heal} / ${test.detail}\n${addXP('skill','医療',9)}`}else{context('手当を試みたが、十分な効果は得られなかった。');detail=test.detail+'\n'+addXP('skill','医療',3)}break}
+ case 'rest':{tick(20);const recovery=state.settings.injuryMode==='real'?6:16;p.st=clamp(p.st+recovery,0,p.maxSt);context('周囲に注意を払いながら短時間の休息を取った。息が整い、少し動けるようになった。');detail=`ST +${recovery} / 20分経過`;break}
+ case 'train':{tick(15);if(!useST(5))break;const name=/筋|腕立て|力/.test(action.raw)?'strength':/走|瞬発|反応/.test(action.raw)?'agility':'toughness';const exp=addXP('ability',name,10);context('無理のない範囲でトレーニングを行い、身体の感覚を確かめた。');detail=`ST -5 / 15分経過 / ${exp}`;break}
+ case 'open':{if(w.room!=='非常口'){context('ここで開くべき重要な扉は見当たらない。非常口で試してみよう。');break}if(w.doorOpen){context('非常扉はすでに開いている。外へ進める。');break}tick(2);if(s.inventory.includes('非常用カード')){w.doorOpen=true;context('非常用カードを読み取り機へかざすと、重いロックが外れた。脱出できる！');detail='非常口：解錠成功'}else{const test=check('strength','機械',-35);if(test.ok){w.doorOpen=true;context('非常扉の機構を力ずくで破り、わずかな隙間を作った。扉が開いた！')}else context('非常扉はびくともしない。カードを探すか別の方法が必要だ。');detail=test.detail}break}
+ case 'hide':{if(!useST(2))break;tick(2);const test=check('agility','回避',15);if(test.ok){w.alarm=clamp(w.alarm-1,0,9);context('物陰に身を潜め、足音と気配を抑えた。敵の注意がわずかに逸れた。')}else context('身を隠そうとしたが、足元の物音が周囲に響いた。');detail='ST -2 / '+test.detail;break}
+ case 'barricade':{if(!useST(8))break;tick(5);const test=check('strength','機械',0);if(test.ok){w.blocked=true;context('棚と資材を動かして、即席の障害物を作った。しばらく追跡を遅らせられそうだ。')}else context('重い棚は思うように動かず、十分な障害物を作れなかった。');detail='ST -8 / '+test.detail;break}
+ case 'power':{if(p.powerState!=='active'){context('異能力を発動しようとしたが、今のあなたには扱えなかった。');break}if(p.ap<12){context('異能力を発動するためのAPが足りない。');break}p.ap-=12;tick(1);const test=check('intelligence','異能制御',10);if(test.ok){context(`${p.powerName}を発動させ、周辺の物体へ干渉した。異形は一瞬ひるんだ。`);w.enemy.alert=clamp(w.enemy.alert-1,0,9)}else context(`${p.powerName}を発動したが、制御が乱れ、十分な効果を得られなかった。`);detail=`AP -12 / ${test.detail}\n${addXP('power','異能制御',8)}`;break}
+ case 'callhelp':{tick(1);if(w.npc.alive&&w.npc.room===w.room&&w.npc.trust>=1){p.downed=false;p.rescueClock=0;p.hp=15;p.injuries.push({part:'全身',type:'重症からの救命',severity:3});context('真鍋が駆け寄り、必死の救護を行った。あなたはかろうじて意識を取り戻した。');detail='HP +15 / 重傷状態で復帰'}else{context('かすれた声で助けを求めた。しかし、すぐ近くに救助できる人はいない。');detail='救助待ち / 時間経過'}break}
+ case 'use':{if(/水|飲/.test(target)&&s.inventory.includes('飲料水')){s.inventory.splice(s.inventory.indexOf('飲料水'),1);p.st=clamp(p.st+12,0,p.maxSt);tick(1);context('飲料水を飲み、少し体力を取り戻した。');detail='ST +12 / 飲料水 -1'}else if(/カード/.test(target)){return execute({type:'open',target,raw:action.raw})}else if(/応急/.test(target)){return execute({type:'heal',target,raw:action.raw})}else context('何をどのように使うか判断できなかった。例：「飲料水を使う」「非常口でカードを使う」');break}
+ default:{tick(1);context('行動を試みた。現在の試作版では、この行動を正確に判定するルールがまだない。別の表現やコマンドで試してほしい。');detail='未対応の行動：能力値や所持品の変更なし（時間1分経過）';break}
+ }
+ if(desc)status(desc,detail,kind);if(p.hp<=0&&!w.end&&!p.downed){p.downed=true;p.rescueClock=0;status('体力が尽き、あなたは瀕死状態に陥った。救助を受けなければ死亡する。','','warning')};return {desc,detail}}
+async function runQueue(actions){if(!state||state.world.end)return;for(let i=0;i<actions.length;i++){if(state.pc.downed&&actions[i].type!=='callhelp'){status('瀕死状態のため、身体を動かして行動することができない。救助を求めるしかない。','','warning');break}const a=actions[i];if(a.condition==='enemy_stunned'&&(!state.world.enemy.alive||!state.world.enemy.stunned)){status('敵が怯んでいないため、後続行動は実行しなかった。','条件不成立','system');break}if(a.condition==='enemy_defeated'&&state.world.enemy.alive){status('敵が倒れていないため、後続行動は実行しなかった。','条件不成立','system');break}const w=state.world;const previousRoom=w.room;const danger=w.enemy.alive&&w.room===w.enemy.room;const preTrigger=!state.pc.downed&&danger&&!a.noInterrupt&&a.type!=='move'&&a.type!=='search'&&Math.random()<.4;if(preTrigger){const remaining=actions.slice(i).map((x,j)=>j===0?{...x,noInterrupt:true}:x);if(pendingAttack(remaining)){render();return}if(state.world.end||state.pc.downed)break}
+ execute(a);if(state.world.end)break;const entered=previousRoom!==w.room&&w.room===w.enemy.room&&w.enemy.alive;if(entered){if(pendingAttack(actions.slice(i+1))){render();return}if(state.world.end||state.pc.downed)break}
+ }render()}
+async function narrateLast(){/* v0.3では通信・AI APIを呼び出さない */}
+async function dispatch(text){if(!state||busy||state.pending||state.world.end||!String(text).trim())return;busy=true;$('sendAction').disabled=true;try{status('「'+String(text).trim().slice(0,200)+'」','','action');const actions=await interpret(text);if(!actions.length){status('行動内容を理解できなかった。もう少し具体的に入力してほしい。','','system');render();return}await runQueue(actions);await narrateLast()}catch(e){status('処理中に問題が発生しました。再度入力してください。',String(e.message),'system');render()}finally{busy=false;render()}}
+function openSettings(){if(!state)return;$('runtimeInterrupt').value=state.settings.interrupt;$('runtimeReport').value=state.settings.report;$('runtimeGrowth').value=state.settings.growth;$('runtimeInjury').value=state.settings.injuryMode;$('runtimeDifficulty').value=state.settings.difficulty;genderUI('runtimeGender','runtimeGenderCustom','runtimeGenderCustomWrap',state.pc.gender||'未設定');$('settingsModal').classList.remove('hidden')}
+function closeSettings(){$('settingsModal').classList.add('hidden')}
+function exportSave(){if(!state)return;const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='boundary_survival_save.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2500)}
+async function checkAI(){aiAvailable=false}
+function wire(){$('pcGender').onchange=()=>genderToggle('pcGender','pcGenderCustomWrap');$('runtimeGender').onchange=()=>genderToggle('runtimeGender','runtimeGenderCustomWrap');$('reroll').onclick=rerollPC;$('startGame').onclick=start;$('resumeGame').onclick=resume;$('settingsOpen').onclick=openSettings;$('settingsClose').onclick=closeSettings;$('settingsBackdrop').onclick=closeSettings;$('saveSettings').onclick=()=>{if(!state)return;state.settings.interrupt=$('runtimeInterrupt').value;state.settings.report=$('runtimeReport').value;state.settings.growth=$('runtimeGrowth').value;state.settings.injuryMode=$('runtimeInjury').value;state.settings.difficulty=$('runtimeDifficulty').value;state.settings.ai=false;state.pc.gender=genderValue('runtimeGender','runtimeGenderCustom');status('ゲーム設定を更新した。変更内容は今後の処理に適用される。','','system');closeSettings();render()};$('saveButton').onclick=()=>{localSave();alert('この端末のブラウザに保存しました。ブラウザのデータを消去すると失われるため、必要ならJSONも出力してください。')};$('exportButton').onclick=exportSave;$('backToTitle').onclick=()=>{if(confirm('タイトルへ戻りますか？ 現在の進行状況は保存されます。'))title()};$('importFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{const incoming=JSON.parse(await f.text());if(incoming.version!==1||!incoming.pc||!incoming.world||!incoming.settings||!Array.isArray(incoming.log))throw Error('互換性のないセーブデータ');if(!confirm('現在のゲームを読み込んだセーブデータで置き換えますか？'))return;state=incoming;state.pc.gender=state.pc.gender||'未設定';render();alert('読み込みました')}catch(err){alert('読み込みに失敗しました：'+err.message)}finally{e.target.value=''}};window.addEventListener('beforeunload',localSave)}
+initializeFields();wire();aiAvailable=false;
+
+</script>
+<script>
+/* 境界崩壊 v0.3 — コマンド構築型疑似GM。通信・生成AI不要。 */
+'use strict';
+const CMD_TYPES = [
+  ['attack','⚔ 攻撃'], ['move','➜ 移動'], ['search','⌕ 探索'], ['collect','＋ 拾う'],
+  ['talk','◎ 会話'], ['recruit','♧ 同行依頼'], ['hide','◈ 隠れる'], ['barricade','▥ 工作'], ['heal','✚ 治療'],
+  ['use','▣ 道具'], ['rest','◷ 休息'], ['train','↑ 訓練'], ['power','✦ 異能力'],
+  ['open','◇ 解錠'], ['callhelp','！ 救助']
+];
+const OPTIONS = {
+ policy:[['normal','通常'],['accuracy','命中重視'],['power','威力重視']],
+ hand:[['right','右手'],['left','左手'],['both','両手']],
+ weapon:[['fist','素手'],['pipe','鉄パイプ'],['stone','床の石（投擲）']],
+ style:[['single','単発'],['multi','連撃（2回判定）']],
+ part:[['胴体','胴体'],['頭','頭'],['目','目'],['腕','腕'],['脚','脚']],
+ combo:[['none','連携なし'],['ally','味方と連携']],
+ focus:[['strength','筋力'],['agility','瞬発力'],['toughness','耐久力']],
+ condition:[['always','無条件で実行'],['enemy_stunned','直前までの行動で敵が怯んだら'],['enemy_defeated','敵を倒せたら']]
+};
+let composing={type:'attack',policy:'normal',hand:'right',weapon:'fist',style:'single',part:'胴体',combo:'none',condition:'always',focus:'strength',room:'廊下',item:'',useItem:''};
+let commandQueue=[];
+function cmdElem(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
+function getLabel(group,value){return (OPTIONS[group]||[]).find(x=>x[0]===value)?.[1]||String(value||'')}
+function selectField(parent,key,label,options,value){const wrap=cmdElem('label','cmd-field');const title=cmdElem('span','cmd-field-label',label);const select=cmdElem('select','cmd-select');select.setAttribute('aria-label',label);select.dataset.field=key;for(const [v,name] of options){const opt=cmdElem('option','',name);opt.value=v;select.append(opt)}if(!options.some(x=>x[0]===value))composing[key]=options[0]?.[0]||'';select.value=composing[key];select.addEventListener('change',()=>{composing[key]=select.value;renderCommandUI()});wrap.append(title,select);parent.append(wrap);return select}
+function actionOptions(type){if(type==='attack')return {policy:composing.policy,hand:composing.hand,weapon:composing.weapon,style:composing.style,part:composing.part,combo:composing.combo};return {}}
+function selectedRoom(){return ROOMS.includes(composing.room)?composing.room:'廊下'}
+function makeCmd(){let t=composing.type,target='',raw='';
+ if(t==='attack'){target=composing.part;raw='攻撃：'+getLabel('part',composing.part)}
+ if(t==='move'){target=selectedRoom();raw='移動：'+target}
+ if(t==='search'){target='周囲';raw='周囲を調べる'}
+ if(t==='collect'){target=composing.item||availableItems()[0]||'';raw='拾う：'+target}
+ if(t==='talk'){target='看護師';raw='看護師と話す'}
+ if(t==='recruit'){target='看護師';raw='看護師に同行を依頼する'}
+ if(t==='hide')raw='身を隠す';
+ if(t==='barricade')raw='バリケードを作る';
+ if(t==='heal')raw='治療する';
+ if(t==='use'){target=composing.useItem||state.inventory[0]||'';raw=target+'を使う'}
+ if(t==='rest')raw='休憩する';
+ if(t==='train')raw=({strength:'筋力',agility:'瞬発力',toughness:'耐久力'}[composing.focus]||'筋力')+'を鍛える';
+ if(t==='power')raw='異能力を使う';
+ if(t==='open')raw='非常口の扉を開ける';
+ if(t==='callhelp')raw='助けを求める';
+ return {type:t,target,raw,condition:composing.condition,options:actionOptions(t)};
+}
+function describeCmd(a){const o=a.options||{};switch(a.type){
+ case 'attack':return `${getLabel('policy',o.policy)}で、${getLabel('hand',o.hand)}の${getLabel('weapon',o.weapon)}を使い、${getLabel('style',o.style)}で敵の${o.part}を狙う${o.combo==='ally'?'。味方と連携する':''}`;
+ case 'move':return `${a.target}へ移動する`;
+ case 'search':return '周辺を探索し、情報と道具を探す';
+ case 'collect':return `${a.target||'周囲の道具'}を拾う`;
+ case 'talk':return '近くの看護師に話しかける';
+ case 'recruit':return '看護師に同行・協力を依頼する';
+ case 'hide':return '物陰に身を隠す';
+ case 'barricade':return '周囲の資材で障害物を作る';
+ case 'heal':return '応急処置を行う';
+ case 'use':return `${a.target||'道具'}を使う`;
+ case 'rest':return '休息して持久力を回復する';
+ case 'train':return `${a.raw}（15分）`;
+ case 'power':return '所持する異能力を発動する';
+ case 'open':return '非常口の扉を開ける';
+ case 'callhelp':return '声を上げて救助を求める';
+ default:return a.raw||'行動';
+}}
+function conditionPrefix(c){return c==='enemy_stunned'?'【敵が怯んだら】':c==='enemy_defeated'?'【敵を倒せたら】':''}
+function validateAction(a){if(a.type==='attack'&&a.options?.weapon==='stone'&&a.options?.hand==='both')return '石を両手扱いにはできません。片手を選択してください。';if(a.type==='collect'&&!a.target)return 'この場所に拾えるアイテムがありません。';if(a.type==='use'&&!a.target)return '所持品がありません。';if(a.type==='move'&&a.target===state.world.room)return 'すでにその部屋にいます。';return ''}
+function chooseType(t){composing.type=t;composing.condition='always';renderCommandUI()}
+function buildActionFields(container){const t=composing.type;const f=cmdElem('div','cmd-fields');
+ if(t==='attack'){
+   selectField(f,'policy','攻撃方針',OPTIONS.policy,composing.policy);
+   selectField(f,'hand','使用する手',OPTIONS.hand,composing.hand);
+   selectField(f,'weapon','使用する武器',OPTIONS.weapon,composing.weapon);
+   selectField(f,'style','攻撃形式',OPTIONS.style,composing.style);
+   selectField(f,'part','狙う部位',OPTIONS.part,composing.part);
+   selectField(f,'combo','仲間との連携',OPTIONS.combo,composing.combo);
+ }else if(t==='move')selectField(f,'room','移動先',ROOMS.map(x=>[x,x+(PATHS[state.world.room].includes(x)?'':'（隣接していません）')]),composing.room);
+ else if(t==='collect'){const xs=availableItems();selectField(f,'item','拾う物',xs.length?xs.map(x=>[x,x]):[['','この部屋にはない']],composing.item)}
+ else if(t==='use'){const xs=state.inventory;selectField(f,'useItem','使用する道具',xs.length?xs.map(x=>[x,x]):[['','所持品なし']],composing.useItem)}
+ else if(t==='train')selectField(f,'focus','訓練の種類',OPTIONS.focus,composing.focus);
+ else {const info={search:'周囲を観察し、調査します。',talk:'近くにいる看護師と会話します。',recruit:'会話で信頼を得た看護師に、同行を頼みます。',hide:'周囲の障害物を利用して身を隠します。',barricade:'家具や資材で障害物を作ろうとします。',heal:'応急セットや協力者を利用して治療します。',rest:'20分休み、持久力を回復します。',power:'異能力が発現済みでAPがある場合に使用します。',open:'非常口の鍵を解除しようとします。',callhelp:'負傷して動けない場合などに助けを呼びます。'};f.append(cmdElem('p','cmd-field-hint',info[t]||'選択した行動を実行します。'))}
+ if(commandQueue.length)selectField(f,'condition','この行動を実行する条件',OPTIONS.condition,composing.condition);
+ container.append(f);
+ const preview=cmdElem('div','cmd-preview');preview.append(cmdElem('div','cmd-preview-caption','擬似的な自然言語の行動宣言'),cmdElem('p','',conditionPrefix(composing.condition)+describeCmd(makeCmd())+'。'));container.append(preview);
+}
+function renderCommandUI(){if(!state||!$('commandBuilder'))return;const root=$('commandBuilder');root.replaceChildren();if(state.pending){root.append(cmdElem('p','cmd-hint','割り込みへの対応後に操作できます。'));return}if(state.world.end){root.append(cmdElem('p','cmd-hint','ゲーム終了。タイトルから新しく始めてください。'));return}
+ const tabs=cmdElem('div','cmd-tabs');tabs.setAttribute('role','group');tabs.setAttribute('aria-label','行動カテゴリ');for(const [key,label] of CMD_TYPES){const b=cmdElem('button','cmd-tab'+(composing.type===key?' active':''),label);b.type='button';b.setAttribute('aria-pressed',composing.type===key?'true':'false');b.disabled=busy;b.addEventListener('click',()=>chooseType(key));tabs.append(b)}root.append(tabs);
+ const body=cmdElem('div','cmd-body');buildActionFields(body);
+ const error=validateAction(makeCmd());if(error)body.append(cmdElem('p','cmd-warning',error));
+ const buttons=cmdElem('div','cmd-buttons');
+ const direct=cmdElem('button','primary','この行動を実行');direct.type='button';direct.disabled=busy||!!error;direct.onclick=()=>executeComposed([makeCmd()]);buttons.append(direct);
+ const add=cmdElem('button','secondary','連続行動に追加 ＋');add.type='button';add.disabled=busy||commandQueue.length>=4||!!error;add.onclick=()=>{commandQueue.push(makeCmd());composing.condition='always';renderCommandUI()};buttons.append(add);body.append(buttons);root.append(body);
+ const queue=cmdElem('section','cmd-queue');queue.append(cmdElem('div','cmd-queue-title',`連続行動 ${commandQueue.length} / 4`));
+ if(commandQueue.length){commandQueue.forEach((a,i)=>{const line=cmdElem('div','cmd-queued');const text=cmdElem('div','cmd-queued-text',`${i+1}. ${conditionPrefix(a.condition)}${describeCmd(a)}`);const x=cmdElem('button','cmd-remove','削除');x.type='button';x.setAttribute('aria-label',`${i+1}番目の行動を削除`);x.onclick=()=>{commandQueue.splice(i,1);renderCommandUI()};line.append(text,x);queue.append(line)});
+ const row=cmdElem('div','cmd-buttons');const execute=cmdElem('button','primary','連続行動を実行 →');execute.type='button';execute.disabled=busy;execute.onclick=()=>executeComposed(commandQueue.slice());const reset=cmdElem('button','secondary','すべて取り消す');reset.type='button';reset.onclick=()=>{commandQueue=[];renderCommandUI()};row.append(execute,reset);queue.append(row);
+ }else queue.append(cmdElem('p','cmd-hint','複数行動をつなげたいときに「連続行動に追加」を使います。追加後、次の行動の条件も指定できます。'));
+ root.append(queue);
+}
+function executeComposed(actions){if(!state||busy||state.pending||state.world.end||!actions.length)return;const invalid=actions.map(validateAction).filter(Boolean);if(invalid.length){status('コマンド条件を確認してください：'+invalid[0],'','system');render();return}busy=true;try{
+ const text=actions.map((a,i)=>`${i+1}. ${conditionPrefix(a.condition)}${describeCmd(a)}`).join(' → ');status('行動宣言：'+text,'','action');
+ commandQueue=[];runQueue(actions); // 発生したNPC割り込みでは runQueue が未実行の行動を保留
+ }catch(e){status('コマンドを処理できませんでした。',String(e.message),'system')}
+ finally{busy=false;render()}
+}
+
+</script>
+</body>
+</html>
